@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lyrics/search_field.dart';
 import 'package:lyrics/strings.dart';
+import 'package:lyrics/widgets/main_button.dart';
+import 'package:lyrics/widgets/search_field.dart';
+import 'package:lyrics/widgets/search_item.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _isLoading = true;
+  var _isLoading = false;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -43,25 +45,13 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildColumn(context, Strings.artistTitle,
+                      SearchItem(Strings.artistTitle,
                           SearchField(Strings.artistHint, () {})),
-                      buildColumn(context, Strings.songTitle,
+                      SearchItem(Strings.songTitle,
                           SearchField(Strings.songHint, () {})),
-                      ButtonTheme(
-                        minWidth: width,
-                        height: width * 0.15,
-                        child: RaisedButton(
-                          shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(8.0),
-                              side:
-                                  BorderSide(color: Colors.black, width: 0.8)),
-                          onPressed: () {},
-                          color: Colors.white,
-                          textColor: Colors.black,
-                          child: Text(Strings.buttonText,
-                              style: TextStyle(fontSize: width * 0.05)),
-                        ),
-                      ),
+                      MainButton(() {
+                        print("button pressed");
+                      }),
                     ],
                   ),
                 ),
@@ -82,21 +72,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    );
-  }
-
-  Column buildColumn(
-      BuildContext context, String title, SearchField textField) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(title,
-            style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: MediaQuery.of(context).size.width * 0.045)),
-        textField,
-      ],
     );
   }
 }
