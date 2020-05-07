@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lyrics/search_field.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,15 +19,18 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           width: width,
           height: height,
-          child: Stack(
+          child: Column(
             children: <Widget>[
               Container(
                 height: height / 4,
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.width * 0.1),
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   "Lyrics",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: width * 0.12, color: Colors.black),
+                  style:
+                      TextStyle(fontSize: height * 0.07, color: Colors.black),
                 ),
               ),
               Center(
@@ -38,22 +42,25 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildColumn(context, "Artist", TextField()),
-                      buildColumn(context, "Song Name", TextField()),
+                      buildColumn(context, "Artist",
+                          SearchField("Enter atrist", () {})),
+                      buildColumn(context, "Song Title",
+                          SearchField("Enter song title", () {})),
                       ButtonTheme(
                         minWidth: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width * 0.15,
                         child: RaisedButton(
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(8.0),
-                              side: BorderSide(color: Colors.black)),
+                              side:
+                                  BorderSide(color: Colors.black, width: 0.8)),
                           onPressed: () {},
                           color: Colors.white,
                           textColor: Colors.black,
                           child: Text("Find Lyrics",
                               style: TextStyle(
                                   fontSize: MediaQuery.of(context).size.width *
-                                      0.045)),
+                                      0.05)),
                         ),
                       ),
                     ],
@@ -78,7 +85,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column buildColumn(BuildContext context, String title, TextField textField) {
+  Column buildColumn(
+      BuildContext context, String title, SearchField textField) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         Text(title,
             style: TextStyle(
                 fontStyle: FontStyle.italic,
-                fontSize: MediaQuery.of(context).size.width * 0.04)),
+                fontSize: MediaQuery.of(context).size.width * 0.045)),
         textField,
       ],
     );
