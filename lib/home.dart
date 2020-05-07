@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lyrics/search_field.dart';
+import 'package:lyrics/strings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,11 +25,10 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Container(
                 height: height / 4,
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.width * 0.1),
+                padding: EdgeInsets.only(bottom: width * 0.1),
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  "Lyrics",
+                  Strings.appName,
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(fontSize: height * 0.07, color: Colors.black),
@@ -43,13 +43,13 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildColumn(context, "Artist",
-                          SearchField("Enter atrist", () {})),
-                      buildColumn(context, "Song Title",
-                          SearchField("Enter song title", () {})),
+                      buildColumn(context, Strings.artistTitle,
+                          SearchField(Strings.artistHint, () {})),
+                      buildColumn(context, Strings.songTitle,
+                          SearchField(Strings.songHint, () {})),
                       ButtonTheme(
-                        minWidth: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width * 0.15,
+                        minWidth: width,
+                        height: width * 0.15,
                         child: RaisedButton(
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(8.0),
@@ -58,10 +58,8 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {},
                           color: Colors.white,
                           textColor: Colors.black,
-                          child: Text("Find Lyrics",
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.05)),
+                          child: Text(Strings.buttonText,
+                              style: TextStyle(fontSize: width * 0.05)),
                         ),
                       ),
                     ],
