@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _isLoading = true;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -67,17 +68,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: height / 4,
-                  alignment: Alignment.bottomRight,
-                  child: SpinKitChasingDots(
-                    color: Theme.of(context).accentColor,
-                    size: 50.0,
+              if (_isLoading)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: height / 4,
+                    alignment: Alignment.bottomRight,
+                    child: SpinKitChasingDots(
+                      color: Theme.of(context).accentColor,
+                      size: 50.0,
+                    ),
                   ),
-                ),
-              )
+                )
             ],
           ),
         ),
