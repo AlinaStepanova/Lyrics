@@ -10,8 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Lyrics',
       debugShowCheckedModeBanner: false,
-      theme:
-          ThemeData(accentColor: Colors.tealAccent, primaryColor: Colors.white),
+      theme: ThemeData(
+          accentColor: Colors.tealAccent,
+          primaryColor: Colors.white,
+          fontFamily: 'PlayfairDisplay'),
       home: HomePage(),
     );
   }
