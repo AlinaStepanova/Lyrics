@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
           child: Stack(
             children: <Widget>[
               Container(
-                height: height / 5,
+                height: height / 4,
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   "Lyrics",
@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      TextField(),
-                      TextField(),
+                      buildColumn(context, "Artist", TextField()),
+                      buildColumn(context, "Song Name", TextField()),
                       ButtonTheme(
                         minWidth: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width * 0.15,
@@ -63,8 +63,8 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: 3 * height / 10,
-                  alignment: Alignment.center,
+                  height: height / 4,
+                  alignment: Alignment.bottomRight,
                   child: SpinKitChasingDots(
                     color: Theme.of(context).accentColor,
                     size: 50.0,
@@ -75,6 +75,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Column buildColumn(BuildContext context, String title, TextField textField) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(title,
+            style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: MediaQuery.of(context).size.width * 0.04)),
+        textField,
+      ],
     );
   }
 }
