@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lyrics/lyrics.dart';
 import 'package:lyrics/strings.dart';
 import 'package:lyrics/widgets/main_button.dart';
 import 'package:lyrics/widgets/search_field.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                       SearchItem(Strings.songTitle,
                           SearchField(Strings.songHint, () {})),
                       MainButton(() {
-                        print("button pressed");
+                        _openBottomSheet();
                       }),
                     ],
                   ),
@@ -73,5 +74,27 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void _openBottomSheet() {
+    showModalBottomSheet<dynamic>(
+        isScrollControlled: true,
+        context: context,
+        isDismissible: false,
+        builder: (BuildContext bc) {
+          return Wrap(children: <Widget>[
+            Container(
+              color: Color(0xFF737373),
+              child: Container(
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(25),
+                        topRight: const Radius.circular(25))),
+                child: Lyrics(),
+              ),
+            )
+          ]);
+        });
   }
 }

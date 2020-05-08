@@ -11,7 +11,7 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-  final GlobalKey _searchKey = GlobalKey(debugLabel: 'SearchBar');
+  final GlobalKey _searchKey = GlobalKey(debugLabel: 'SearchField');
   final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,9 @@ class _SearchFieldState extends State<SearchField> {
         counterText: '',
         fillColor: Colors.white,
         filled: true,
-        contentPadding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.0),
+        contentPadding: EdgeInsets.all(0.0),
         hintText: widget.hintText,
         focusedBorder: _buildOutlineInputBorder(Colors.tealAccent),
-        border: _buildOutlineInputBorder(Colors.black),
         enabledBorder: _buildOutlineInputBorder(Colors.black),
       ),
       onFieldSubmitted: (text) {
