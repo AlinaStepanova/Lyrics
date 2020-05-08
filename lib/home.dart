@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: new BorderRadius.only(
                         topLeft: const Radius.circular(25),
                         topRight: const Radius.circular(25))),
-                child: Lyrics(),
+                child: Lyrics("Artist", "Song name", "Song lyrics"),
               ),
             )
           ]);
