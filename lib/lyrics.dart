@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lyrics/widgets/header_text.dart';
 
 class Lyrics extends StatefulWidget {
   final String artist;
@@ -15,40 +16,25 @@ class Lyrics extends StatefulWidget {
 class _LyricsState extends State<Lyrics> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.95,
+      height: height * 0.95,
       child: Stack(
         children: <Widget>[
           Column(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: height * 0.2,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05,
-                      right: MediaQuery.of(context).size.width * 0.05,
-                      top: 4),
+                      left: width * 0.05, right: width * 0.05, top: 4),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(widget.songName,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.04,
-                              color: Colors.black)),
-                      Text("by " + widget.artist,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.02,
-                              color: Colors.black)),
+                      HeaderText(widget.songName, height * 0.04, false),
+                      HeaderText(widget.artist, height * 0.02, true),
                     ],
                   ),
                 ),
@@ -57,14 +43,13 @@ class _LyricsState extends State<Lyrics> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.08,
-                      right: MediaQuery.of(context).size.width * 0.08,
-                      bottom: MediaQuery.of(context).size.width * 0.02),
+                      left: width * 0.08,
+                      right: width * 0.08,
+                      bottom: width * 0.02),
                   child: SingleChildScrollView(
                     child: Text(
                       widget.lyrics,
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.045),
+                      style: TextStyle(fontSize: width * 0.045),
                     ),
                   ),
                 ),
