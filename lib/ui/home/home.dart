@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   final _songTextController = TextEditingController();
   var _isArtistValid = true;
   var _isSongValid = true;
+  GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   void dispose() {
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
+      key: _key,
       body: SingleChildScrollView(
         child: Container(
           width: width,
@@ -101,8 +103,8 @@ class _HomePageState extends State<HomePage> {
       _songTextController.text,
       onArtistValidationResult: handleArtistValidationResult,
       onSongNameValidationResult: handleSongValidationResult,
-      onRequestError: (String s) {
-        print(s);
+      onRequestError: () {
+        showErrorSnackBar();
       },
       onRequestSuccess: (String lyrics) {
         _openBottomSheet(lyrics);
@@ -130,6 +132,15 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _isSongValid = isValid;
     });
+  }
+
+  void showErrorSnackBar() {
+    _key.currentState.showSnackBar(
+      SnackBar(
+          content:
+              Text(Strings.requestErrorText, style: TextStyle(fontSize: 16)),
+          duration: Duration(milliseconds: 4000)),
+    );
   }
 
   void _openBottomSheet(String lyrics) {

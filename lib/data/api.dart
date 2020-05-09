@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'dart:convert' show json, utf8;
+import 'dart:convert' show json;
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
 class Api {
   final String _url = "https://api.lyrics.ovh/v1/";
+  final key = "lyrics";
 
   Future<String> fetchLyrics(String artist, String songName) async {
     var response;
     try {
       response = await http.get(_url + artist + "/" + songName);
     } catch (Exception) {
-      print('Network error');
       return null;
     }
     if (response == null) return null;
@@ -28,6 +28,6 @@ class Api {
       return null;
     }
 
-    return responseJson.values.first.toString();
+    return responseJson[key];
   }
 }

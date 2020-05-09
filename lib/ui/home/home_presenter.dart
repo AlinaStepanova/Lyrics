@@ -1,6 +1,8 @@
 import 'package:lyrics/data/api.dart';
 
 class HomePresenter {
+  final api = Api();
+
   bool _isTextValid(String text) {
     var result = true;
     if (text == null ||
@@ -19,7 +21,7 @@ class HomePresenter {
   findLyrics(String artist, String songName,
       {Function(bool) onArtistValidationResult,
       Function(bool) onSongNameValidationResult,
-      Function(String) onRequestError,
+      Function() onRequestError,
       Function(String) onRequestSuccess}) {
     bool isArtistValid = _isTextValid(artist);
     bool isSongValid = _isTextValid(songName);
@@ -32,14 +34,12 @@ class HomePresenter {
   }
 
   Future<void> _retrieveLyrics(String artist, String songName,
-      {Function(String) onRequestError,
-      Function(String) onRequestSuccess}) async {
-    final api = Api();
+      {Function() onRequestError, Function(String) onRequestSuccess}) async {
     final jsonLyrics = await api.fetchLyrics(artist, songName);
     if (jsonLyrics != null) {
       onRequestSuccess(jsonLyrics);
     } else {
-      onRequestError("No lyrics found");
+      onRequestError();
     }
   }
 }
