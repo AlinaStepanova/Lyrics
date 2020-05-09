@@ -101,12 +101,16 @@ class _HomePageState extends State<HomePage> {
     _homePresenter.findLyrics(
       _artistTextController.text,
       _songTextController.text,
-      onArtistValidationResult: handleArtistValidationResult,
-      onSongNameValidationResult: handleSongValidationResult,
+      onValidationResults: (bool isArtistValid, bool isSongNameValid) {
+        handleArtistValidationResult(isArtistValid);
+        handleSongValidationResult(isSongNameValid);
+        if (isArtistValid && isSongNameValid) setLoadingState(true);
+      },
       onRequestError: () {
         showErrorSnackBar();
       },
       onRequestSuccess: (String lyrics) {
+        setLoadingState(false);
         _openBottomSheet(lyrics);
       },
     );
@@ -135,12 +139,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showErrorSnackBar() {
+    setLoadingState(false);
     _key.currentState.showSnackBar(
       SnackBar(
-          content:
-              Text(Strings.requestErrorText, style: TextStyle(fontSize: 16)),
-          duration: Duration(milliseconds: 4000)),
+          content: Text(Strings.callErrorText, style: TextStyle(fontSize: 16)),
+          duration: Duration(milliseconds: 2500)),
     );
+  }
+
+  void setLoadingState(bool isLoading) {
+    setState(() {
+      _isLoading = isLoading;
+    });
   }
 
   void _openBottomSheet(String lyrics) {

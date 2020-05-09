@@ -19,14 +19,15 @@ class HomePresenter {
   }
 
   findLyrics(String artist, String songName,
-      {Function(bool) onArtistValidationResult,
-      Function(bool) onSongNameValidationResult,
+      {Function(bool, bool) onValidationResults,
+      //Function(bool) onSongNameValidationResult,
       Function() onRequestError,
       Function(String) onRequestSuccess}) {
     bool isArtistValid = _isTextValid(artist);
     bool isSongValid = _isTextValid(songName);
-    onArtistValidationResult(isArtistValid);
-    onSongNameValidationResult(isSongValid);
+    onValidationResults(isArtistValid, isSongValid);
+    /*onArtistValidationResult(isArtistValid);
+    onSongNameValidationResult(isSongValid);*/
     if (isArtistValid && isSongValid) {
       _retrieveLyrics(artist, songName,
           onRequestError: onRequestError, onRequestSuccess: onRequestSuccess);

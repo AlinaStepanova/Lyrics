@@ -5,5 +5,5 @@ class Strings {
   static final songTitle = "Song";
   static final songHint = "Enter song title";
   static final buttonText = "Find Lyrics";
-  static final requestErrorText = "No lyrics found";
+  static final callErrorText = "No lyrics found";
 }
