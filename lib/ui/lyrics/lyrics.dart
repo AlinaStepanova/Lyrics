@@ -34,7 +34,7 @@ class _LyricsState extends State<Lyrics> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       HeaderText(widget.songName, height * 0.04, false),
-                      HeaderText(widget.artist, height * 0.02, true),
+                      HeaderText("by " + widget.artist, height * 0.025, true),
                     ],
                   ),
                 ),
@@ -45,7 +45,7 @@ class _LyricsState extends State<Lyrics> {
                   padding: EdgeInsets.only(
                       left: width * 0.08,
                       right: width * 0.08,
-                      bottom: width * 0.02),
+                      bottom: width * 0.04),
                   child: SingleChildScrollView(
                     child: Text(
                       widget.lyrics,

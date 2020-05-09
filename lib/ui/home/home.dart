@@ -101,9 +101,11 @@ class _HomePageState extends State<HomePage> {
       _songTextController.text,
       onArtistValidationResult: handleArtistValidationResult,
       onSongNameValidationResult: handleSongValidationResult,
-      onRequestError: () {},
-      onRequestSuccess: () {
-        _openBottomSheet();
+      onRequestError: (String s) {
+        print(s);
+      },
+      onRequestSuccess: (String lyrics) {
+        _openBottomSheet(lyrics);
       },
     );
   }
@@ -130,7 +132,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _openBottomSheet() {
+  void _openBottomSheet(String lyrics) {
     showModalBottomSheet<dynamic>(
         isScrollControlled: true,
         context: context,
@@ -145,7 +147,8 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: new BorderRadius.only(
                         topLeft: const Radius.circular(25),
                         topRight: const Radius.circular(25))),
-                child: Lyrics("Artist", "Song name", "Song lyrics"),
+                child: Lyrics(_artistTextController.text.toLowerCase(),
+                    _songTextController.text.toLowerCase(), lyrics),
               ),
             )
           ]);
