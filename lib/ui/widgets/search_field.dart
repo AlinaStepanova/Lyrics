@@ -21,6 +21,7 @@ class _SearchFieldState extends State<SearchField> {
       key: _searchKey,
       maxLength: 100,
       maxLines: 1,
+      autofocus: false,
       controller: widget.controller,
       textAlign: TextAlign.start,
       style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),

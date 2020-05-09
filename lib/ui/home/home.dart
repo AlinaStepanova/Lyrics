@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lyrics/strings.dart';
 import 'package:lyrics/ui/home/home_presenter.dart';
@@ -33,6 +34,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
@@ -83,6 +87,7 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     height: height / 4,
+                    padding: EdgeInsets.only(bottom: height * 0.1),
                     alignment: Alignment.bottomRight,
                     child: SpinKitChasingDots(
                       color: Theme.of(context).accentColor,
