@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lyrics/widgets/header_text.dart';
+import 'package:lyrics/ui/widgets/header_text.dart';
 
 class Lyrics extends StatefulWidget {
   final String artist;

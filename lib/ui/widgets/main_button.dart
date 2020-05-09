@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../strings.dart';
+import '../../strings.dart';
 
 class MainButton extends StatelessWidget {
   final Function call;

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lyrics/lyrics.dart';
 import 'package:lyrics/strings.dart';
-import 'package:lyrics/widgets/main_button.dart';
-import 'package:lyrics/widgets/search_field.dart';
-import 'package:lyrics/widgets/search_item.dart';
+import 'package:lyrics/ui/home/home_presenter.dart';
+import 'package:lyrics/ui/lyrics/lyrics.dart';
+import 'package:lyrics/ui/widgets/main_button.dart';
+import 'package:lyrics/ui/widgets/search_field.dart';
+import 'package:lyrics/ui/widgets/search_item.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,11 +15,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _isLoading = false;
+  final _inputKeyArtist = GlobalKey(debugLabel: 'inputTextArtist');
+  final _inputKeySong = GlobalKey(debugLabel: 'inputTextSong');
+  final _artistTextController = TextEditingController();
+  final _songTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    _artistTextController?.dispose();
+    _songTextController?.dispose();
+    super.dispose();
+  }
+
+  final HomePresenter _homePresenter = HomePresenter();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
@@ -46,12 +61,16 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      SearchItem(Strings.artistTitle,
-                          SearchField(Strings.artistHint, () {})),
-                      SearchItem(Strings.songTitle,
-                          SearchField(Strings.songHint, () {})),
+                      SearchItem(
+                          Strings.artistTitle,
+                          SearchField(Strings.artistHint, checkArtistInput,
+                              _artistTextController)),
+                      SearchItem(
+                          Strings.songTitle,
+                          SearchField(Strings.songHint, checkSongInput,
+                              _songTextController)),
                       MainButton(() {
-                        _openBottomSheet();
+                        findLyrics();
                       }),
                     ],
                   ),
@@ -74,6 +93,20 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void findLyrics() {}
+
+  void checkArtistInput() {
+    _homePresenter.validate(_artistTextController.text, callback: () {
+      print(_artistTextController.text + " is valid");
+    });
+  }
+
+  void checkSongInput() {
+    _homePresenter.validate(_songTextController.text, callback: () {
+      print(_songTextController.text + " is valid");
+    });
   }
 
   void _openBottomSheet() {

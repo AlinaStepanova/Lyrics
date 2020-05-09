@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lyrics/widgets/search_field.dart';
+
+import 'search_field.dart';
 
 class SearchItem extends StatelessWidget {
   final String title;

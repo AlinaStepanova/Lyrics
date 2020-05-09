@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 class SearchField extends StatefulWidget {
   final String hintText;
   final Function onSubmitted;
+  final TextEditingController controller;
 
-  const SearchField(this.hintText, this.onSubmitted);
+  const SearchField(this.hintText, this.onSubmitted, this.controller);
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }
 
 class _SearchFieldState extends State<SearchField> {
   final GlobalKey _searchKey = GlobalKey(debugLabel: 'SearchField');
-  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       key: _searchKey,
       maxLength: 100,
       maxLines: 1,
-      controller: _searchController,
+      controller: widget.controller,
       textAlign: TextAlign.start,
       style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
       cursorColor: Colors.tealAccent,
@@ -33,7 +33,7 @@ class _SearchFieldState extends State<SearchField> {
         enabledBorder: _buildOutlineInputBorder(Colors.black),
       ),
       onFieldSubmitted: (text) {
-        widget.onSubmitted(text);
+        widget.onSubmitted();
       },
       keyboardType: TextInputType.text,
     );

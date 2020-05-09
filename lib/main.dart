@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lyrics/strings.dart';
 
-import 'home.dart';
+import 'ui/home/home.dart';
 
 void main() => runApp(MyApp());
 
