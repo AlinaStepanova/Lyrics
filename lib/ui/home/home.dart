@@ -15,10 +15,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _isLoading = false;
-  final _inputKeyArtist = GlobalKey(debugLabel: 'inputTextArtist');
-  final _inputKeySong = GlobalKey(debugLabel: 'inputTextSong');
   final _artistTextController = TextEditingController();
   final _songTextController = TextEditingController();
+  var _isArtistValid = true;
+  var _isSongValid = true;
 
   @override
   void dispose() {
@@ -64,11 +64,11 @@ class _HomePageState extends State<HomePage> {
                       SearchItem(
                           Strings.artistTitle,
                           SearchField(Strings.artistHint, checkArtistInput,
-                              _artistTextController)),
+                              _artistTextController, _isArtistValid)),
                       SearchItem(
                           Strings.songTitle,
                           SearchField(Strings.songHint, checkSongInput,
-                              _songTextController)),
+                              _songTextController, _isSongValid)),
                       MainButton(() {
                         findLyrics();
                       }),
@@ -95,17 +95,38 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void findLyrics() {}
+  void findLyrics() {
+    _homePresenter.findLyrics(
+      _artistTextController.text,
+      _songTextController.text,
+      onArtistValidationResult: handleArtistValidationResult,
+      onSongNameValidationResult: handleSongValidationResult,
+      onRequestError: () {},
+      onRequestSuccess: () {
+        _openBottomSheet();
+      },
+    );
+  }
 
   void checkArtistInput() {
-    _homePresenter.validate(_artistTextController.text, callback: () {
-      print(_artistTextController.text + " is valid");
-    });
+    _homePresenter.validate(_artistTextController.text,
+        onValidationResult: handleArtistValidationResult);
   }
 
   void checkSongInput() {
-    _homePresenter.validate(_songTextController.text, callback: () {
-      print(_songTextController.text + " is valid");
+    _homePresenter.validate(_songTextController.text,
+        onValidationResult: handleSongValidationResult);
+  }
+
+  handleArtistValidationResult(bool isValid) {
+    setState(() {
+      _isArtistValid = isValid;
+    });
+  }
+
+  handleSongValidationResult(bool isValid) {
+    setState(() {
+      _isSongValid = isValid;
     });
   }
 

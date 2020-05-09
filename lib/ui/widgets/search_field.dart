@@ -5,8 +5,10 @@ class SearchField extends StatefulWidget {
   final String hintText;
   final Function onSubmitted;
   final TextEditingController controller;
+  final isValid;
 
-  const SearchField(this.hintText, this.onSubmitted, this.controller);
+  const SearchField(
+      this.hintText, this.onSubmitted, this.controller, this.isValid);
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }
@@ -27,10 +29,12 @@ class _SearchFieldState extends State<SearchField> {
         counterText: '',
         fillColor: Colors.white,
         filled: true,
+        errorText: (!widget.isValid) ? "Please, enter valid text" : null,
         contentPadding: EdgeInsets.all(0.0),
         hintText: widget.hintText,
         focusedBorder: _buildOutlineInputBorder(Colors.tealAccent),
         enabledBorder: _buildOutlineInputBorder(Colors.black),
+        errorBorder: _buildOutlineInputBorder(Colors.red),
       ),
       onFieldSubmitted: (text) {
         widget.onSubmitted();
