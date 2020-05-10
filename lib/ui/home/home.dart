@@ -69,14 +69,14 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       SearchItem(
                           Strings.artistTitle,
-                          SearchField(Strings.artistHint, checkArtistInput,
+                          SearchField(Strings.artistHint, _checkArtistInput,
                               _artistTextController, _isArtistValid)),
                       SearchItem(
                           Strings.songTitle,
-                          SearchField(Strings.songHint, checkSongInput,
+                          SearchField(Strings.songHint, _checkSongInput,
                               _songTextController, _isSongValid)),
                       MainButton(() {
-                        findLyrics();
+                        _findLyrics();
                       }),
                     ],
                   ),
@@ -102,49 +102,49 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void findLyrics() {
+  void _findLyrics() {
     _homePresenter.findLyrics(
       _artistTextController.text,
       _songTextController.text,
       onValidationResults: (bool isArtistValid, bool isSongNameValid) {
-        handleArtistValidationResult(isArtistValid);
-        handleSongValidationResult(isSongNameValid);
-        if (isArtistValid && isSongNameValid) setLoadingState(true);
+        _handleArtistValidationResult(isArtistValid);
+        _handleSongValidationResult(isSongNameValid);
+        if (isArtistValid && isSongNameValid) _setLoadingState(true);
       },
       onRequestError: () {
-        showErrorSnackBar();
+        _showErrorSnackBar();
       },
       onRequestSuccess: (String lyrics) {
-        setLoadingState(false);
+        _setLoadingState(false);
         _openBottomSheet(lyrics);
       },
     );
   }
 
-  void checkArtistInput() {
+  void _checkArtistInput() {
     _homePresenter.validate(_artistTextController.text,
-        onValidationResult: handleArtistValidationResult);
+        onValidationResult: _handleArtistValidationResult);
   }
 
-  void checkSongInput() {
+  void _checkSongInput() {
     _homePresenter.validate(_songTextController.text,
-        onValidationResult: handleSongValidationResult);
+        onValidationResult: _handleSongValidationResult);
   }
 
-  handleArtistValidationResult(bool isValid) {
+  void _handleArtistValidationResult(bool isValid) {
     setState(() {
       _isArtistValid = isValid;
     });
   }
 
-  handleSongValidationResult(bool isValid) {
+  void _handleSongValidationResult(bool isValid) {
     setState(() {
       _isSongValid = isValid;
     });
   }
 
-  void showErrorSnackBar() {
-    setLoadingState(false);
+  void _showErrorSnackBar() {
+    _setLoadingState(false);
     _key.currentState.showSnackBar(
       SnackBar(
           content: Text(Strings.callErrorText, style: TextStyle(fontSize: 16)),
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void setLoadingState(bool isLoading) {
+  void _setLoadingState(bool isLoading) {
     setState(() {
       _isLoading = isLoading;
     });

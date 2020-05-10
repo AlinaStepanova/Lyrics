@@ -3,6 +3,24 @@ import 'package:lyrics/data/api.dart';
 class HomePresenter {
   final api = Api();
 
+  validate(String artist, {Function(bool) onValidationResult}) {
+    bool isValid = _isTextValid(artist);
+    onValidationResult(isValid);
+  }
+
+  findLyrics(String artist, String songName,
+      {Function(bool, bool) onValidationResults,
+      Function() onRequestError,
+      Function(String) onRequestSuccess}) {
+    bool isArtistValid = _isTextValid(artist);
+    bool isSongValid = _isTextValid(songName);
+    onValidationResults(isArtistValid, isSongValid);
+    if (isArtistValid && isSongValid) {
+      _retrieveLyrics(artist, songName,
+          onRequestError: onRequestError, onRequestSuccess: onRequestSuccess);
+    }
+  }
+
   bool _isTextValid(String text) {
     var result = true;
     if (text == null ||
@@ -11,27 +29,6 @@ class HomePresenter {
       result = false;
     }
     return result;
-  }
-
-  validate(String artist, {Function(bool) onValidationResult}) {
-    bool isValid = _isTextValid(artist);
-    onValidationResult(isValid);
-  }
-
-  findLyrics(String artist, String songName,
-      {Function(bool, bool) onValidationResults,
-      //Function(bool) onSongNameValidationResult,
-      Function() onRequestError,
-      Function(String) onRequestSuccess}) {
-    bool isArtistValid = _isTextValid(artist);
-    bool isSongValid = _isTextValid(songName);
-    onValidationResults(isArtistValid, isSongValid);
-    /*onArtistValidationResult(isArtistValid);
-    onSongNameValidationResult(isSongValid);*/
-    if (isArtistValid && isSongValid) {
-      _retrieveLyrics(artist, songName,
-          onRequestError: onRequestError, onRequestSuccess: onRequestSuccess);
-    }
   }
 
   Future<void> _retrieveLyrics(String artist, String songName,

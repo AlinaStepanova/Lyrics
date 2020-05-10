@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lyrics/ui/widgets/header_text.dart';
 
+import '../../strings.dart';
+
 class Lyrics extends StatefulWidget {
   final String artist;
   final String songName;
@@ -34,7 +36,8 @@ class _LyricsState extends State<Lyrics> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       HeaderText(widget.songName, height * 0.04, false),
-                      HeaderText("by " + widget.artist, height * 0.025, true),
+                      HeaderText(Strings.artistPrefix + widget.artist,
+                          height * 0.025, true),
                     ],
                   ),
                 ),

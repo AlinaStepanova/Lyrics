@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../strings.dart';
+
 class SearchField extends StatefulWidget {
   final String hintText;
   final Function onSubmitted;
@@ -30,7 +32,7 @@ class _SearchFieldState extends State<SearchField> {
         counterText: '',
         fillColor: Colors.white,
         filled: true,
-        errorText: (!widget.isValid) ? "Please, enter valid text" : null,
+        errorText: (!widget.isValid) ? Strings.validationErrorText : null,
         contentPadding: EdgeInsets.all(0.0),
         hintText: widget.hintText,
         focusedBorder: _buildOutlineInputBorder(Colors.tealAccent),

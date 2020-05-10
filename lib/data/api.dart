@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class Api {
   final String _url = "https://api.lyrics.ovh/v1/";
-  final key = "lyrics";
+  final _key = "lyrics";
 
   Future<String> fetchLyrics(String artist, String songName) async {
     var response;
@@ -27,7 +27,6 @@ class Api {
         responseJson.values.length != 0) {
       return null;
     }
-
-    return responseJson[key];
+    return responseJson[_key];
   }
 }
