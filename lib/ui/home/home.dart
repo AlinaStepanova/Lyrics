@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:lyrics/strings.dart';
 import 'package:lyrics/ui/home/home_presenter.dart';
 import 'package:lyrics/ui/lyrics/lyrics.dart';
 import 'package:lyrics/ui/widgets/main_button.dart';
 import 'package:lyrics/ui/widgets/search_field.dart';
 import 'package:lyrics/ui/widgets/search_item.dart';
+import 'package:lyrics/utils/constants.dart';
+import 'package:lyrics/utils/strings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,10 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _isLoading = false;
-  final _artistTextController = TextEditingController();
-  final _songTextController = TextEditingController();
   var _isArtistValid = true;
   var _isSongValid = true;
+  final _artistTextController = TextEditingController();
+  final _songTextController = TextEditingController();
   GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     ]);
     return Scaffold(
       resizeToAvoidBottomPadding: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.primaryColor,
       key: _key,
       body: SingleChildScrollView(
         child: Container(
@@ -54,8 +55,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   Strings.appName,
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontSize: height * 0.07, color: Colors.black),
+                  style: TextStyle(
+                      fontSize: height * 0.07, color: Constants.textColor),
                 ),
               ),
               Center(
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.bottomRight,
                     child: SpinKitChasingDots(
                       color: Theme.of(context).accentColor,
-                      size: 50.0,
+                      size: Constants.loadingBarSize,
                     ),
                   ),
                 )
@@ -147,8 +148,9 @@ class _HomePageState extends State<HomePage> {
     _setLoadingState(false);
     _key.currentState.showSnackBar(
       SnackBar(
-          content: Text(Strings.callErrorText, style: TextStyle(fontSize: 16)),
-          duration: Duration(milliseconds: 2500)),
+          content: Text(Strings.callErrorText,
+              style: TextStyle(fontSize: Constants.progressBarFontSize)),
+          duration: Duration(milliseconds: Constants.snackBarDuration)),
     );
   }
 
@@ -166,13 +168,15 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext bc) {
           return Wrap(children: <Widget>[
             Container(
-              color: Color(0xFF737373),
+              color: Constants.bottomSheetContainer,
               child: Container(
                 decoration: new BoxDecoration(
-                    color: Colors.white,
+                    color: Constants.primaryColor,
                     borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(25),
-                        topRight: const Radius.circular(25))),
+                        topLeft: const Radius.circular(
+                            Constants.bottomSheetBorderRadius),
+                        topRight: const Radius.circular(
+                            Constants.bottomSheetBorderRadius))),
                 child: Lyrics(_artistTextController.text.toLowerCase(),
                     _songTextController.text.toLowerCase(), lyrics),
               ),

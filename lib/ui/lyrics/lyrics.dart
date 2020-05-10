@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lyrics/ui/widgets/header_text.dart';
+import 'package:lyrics/utils/constants.dart';
 
-import '../../strings.dart';
+import '../../utils/strings.dart';
 
 class Lyrics extends StatefulWidget {
   final String artist;
@@ -42,17 +43,18 @@ class _LyricsState extends State<Lyrics> {
                   ),
                 ),
               ),
-              Divider(color: Colors.tealAccent),
+              Divider(color: Constants.accentColor),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
                       left: width * 0.08,
                       right: width * 0.08,
-                      bottom: width * 0.04),
+                      top: width * 0.02,
+                      bottom: width * 0.05),
                   child: SingleChildScrollView(
                     child: Text(
                       widget.lyrics,
-                      style: TextStyle(fontSize: width * 0.045),
+                      style: TextStyle(fontSize: width * 0.0475),
                     ),
                   ),
                 ),

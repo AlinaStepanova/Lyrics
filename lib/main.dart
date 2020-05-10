@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lyrics/strings.dart';
+import 'package:lyrics/utils/strings.dart';
 
 import 'ui/home/home.dart';
+import 'utils/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
       title: Strings.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          accentColor: Colors.tealAccent,
-          primaryColor: Colors.white,
-          fontFamily: 'PlayfairDisplay'),
+          accentColor: Constants.accentColor,
+          primaryColor: Constants.primaryColor,
+          fontFamily: Constants.defaultFontFamily),
       home: HomePage(),
     );
   }

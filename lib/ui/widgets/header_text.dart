@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrics/utils/constants.dart';
 
 class HeaderText extends StatelessWidget {
   final String text;
@@ -15,7 +16,7 @@ class HeaderText extends StatelessWidget {
         maxLines: 2,
         style: TextStyle(
             fontSize: height,
-            color: Colors.black,
+            color: Constants.textColor,
             fontStyle: (isItalic) ? FontStyle.italic : FontStyle.normal));
   }
 }

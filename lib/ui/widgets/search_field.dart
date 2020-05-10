@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lyrics/utils/constants.dart';
 
-import '../../strings.dart';
+import '../../utils/strings.dart';
 
 class SearchField extends StatefulWidget {
   final String hintText;
@@ -27,17 +28,17 @@ class _SearchFieldState extends State<SearchField> {
       controller: widget.controller,
       textAlign: TextAlign.start,
       style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
-      cursorColor: Colors.tealAccent,
+      cursorColor: Constants.accentColor,
       decoration: InputDecoration(
         counterText: '',
-        fillColor: Colors.white,
+        fillColor: Constants.primaryColor,
         filled: true,
         errorText: (!widget.isValid) ? Strings.validationErrorText : null,
         contentPadding: EdgeInsets.all(0.0),
         hintText: widget.hintText,
-        focusedBorder: _buildOutlineInputBorder(Colors.tealAccent),
-        enabledBorder: _buildOutlineInputBorder(Colors.black),
-        errorBorder: _buildOutlineInputBorder(Colors.red),
+        focusedBorder: _buildOutlineInputBorder(Constants.accentColor),
+        enabledBorder: _buildOutlineInputBorder(Constants.textColor),
+        errorBorder: _buildOutlineInputBorder(Constants.errorColor),
       ),
       onFieldSubmitted: (text) {
         widget.onSubmitted();
