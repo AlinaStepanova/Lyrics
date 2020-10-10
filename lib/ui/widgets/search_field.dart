@@ -24,6 +24,7 @@ class _SearchFieldState extends State<SearchField> {
       key: _searchKey,
       maxLength: 100,
       maxLines: 1,
+      textCapitalization: TextCapitalization.sentences,
       autofocus: false,
       controller: widget.controller,
       textAlign: TextAlign.start,
@@ -40,9 +41,7 @@ class _SearchFieldState extends State<SearchField> {
         enabledBorder: _buildOutlineInputBorder(Constants.textColor),
         errorBorder: _buildOutlineInputBorder(Constants.errorColor),
       ),
-      onFieldSubmitted: (text) {
-        widget.onSubmitted();
-      },
+      onFieldSubmitted: (text) => widget.onSubmitted(),
       keyboardType: TextInputType.text,
     );
   }

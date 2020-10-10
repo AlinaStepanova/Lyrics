@@ -2,6 +2,9 @@ import 'package:lyrics/data/api.dart';
 
 class HomePresenter {
   final api = Api();
+  var _songName = "";
+  var _lyrics = "";
+  var _artist = "";
 
   validate(String artist, {Function(bool) onValidationResult}) {
     bool isValid = _isTextValid(artist);
@@ -12,12 +15,20 @@ class HomePresenter {
       {Function(bool, bool) onValidationResults,
       Function() onRequestError,
       Function(String) onRequestSuccess}) {
-    bool isArtistValid = _isTextValid(artist);
-    bool isSongValid = _isTextValid(songName);
-    onValidationResults(isArtistValid, isSongValid);
-    if (isArtistValid && isSongValid) {
-      _retrieveLyrics(artist, songName,
-          onRequestError: onRequestError, onRequestSuccess: onRequestSuccess);
+    if (_songName.isNotEmpty &&
+        _songName == songName.trim() &&
+        _artist.isNotEmpty &&
+        _artist == artist.trim() &&
+        _lyrics.isNotEmpty) {
+      onRequestSuccess(_lyrics);
+    } else {
+      bool isArtistValid = _isTextValid(artist);
+      bool isSongValid = _isTextValid(songName);
+      onValidationResults(isArtistValid, isSongValid);
+      if (isArtistValid && isSongValid) {
+        _retrieveLyrics(artist, songName,
+            onRequestError: onRequestError, onRequestSuccess: onRequestSuccess);
+      }
     }
   }
 
@@ -36,6 +47,9 @@ class HomePresenter {
     final jsonLyrics = await api.fetchLyrics(artist, songName);
     if (jsonLyrics != null && jsonLyrics.isNotEmpty) {
       onRequestSuccess(jsonLyrics);
+      _artist = artist.trim();
+      _songName = songName.trim();
+      _lyrics = jsonLyrics.trim();
     } else {
       onRequestError();
     }

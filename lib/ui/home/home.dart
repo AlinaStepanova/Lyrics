@@ -132,15 +132,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleArtistValidationResult(bool isValid) {
-    setState(() {
-      _isArtistValid = isValid;
-    });
+    setState(() => _isArtistValid = isValid);
   }
 
   void _handleSongValidationResult(bool isValid) {
-    setState(() {
-      _isSongValid = isValid;
-    });
+    setState(() => _isSongValid = isValid);
   }
 
   void _showErrorSnackBar() {
@@ -166,7 +162,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       isDismissible: false,
       backgroundColor: Colors.transparent,
-      builder: (BuildContext bc) {
+      builder: (BuildContext context) {
         return Container(
           decoration: BoxDecoration(
             color: Constants.primaryColor,
