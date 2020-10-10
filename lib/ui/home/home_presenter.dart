@@ -34,7 +34,8 @@ class HomePresenter {
   Future<void> _retrieveLyrics(String artist, String songName,
       {Function() onRequestError, Function(String) onRequestSuccess}) async {
     final jsonLyrics = await api.fetchLyrics(artist, songName);
-    if (jsonLyrics != null) {
+    if (jsonLyrics != null && jsonLyrics != "") {
+      print("jsonLyrics:" + jsonLyrics);
       onRequestSuccess(jsonLyrics);
     } else {
       onRequestError();
