@@ -16,14 +16,17 @@ class MainButton extends StatelessWidget {
       minWidth: width,
       height: width * 0.15,
       child: RaisedButton(
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(Constants.borderRadius),
-            side: BorderSide(color: Constants.textColor, width: 0.8)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Constants.borderRadius),
+          side: BorderSide(color: Constants.textColor, width: 0.8),
+        ),
         onPressed: call,
         color: Constants.primaryColor,
         textColor: Constants.textColor,
-        child:
-            Text(Strings.buttonText, style: TextStyle(fontSize: width * 0.05)),
+        child: Text(
+          Strings.buttonText,
+          style: TextStyle(fontSize: width * 0.05),
+        ),
       ),
     );
   }

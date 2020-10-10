@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final HomePresenter _homePresenter = HomePresenter();
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -69,16 +70,16 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       SearchItem(
-                          Strings.artistTitle,
-                          SearchField(Strings.artistHint, _checkArtistInput,
-                              _artistTextController, _isArtistValid)),
+                        Strings.artistTitle,
+                        SearchField(Strings.artistHint, _checkArtistInput,
+                            _artistTextController, _isArtistValid),
+                      ),
                       SearchItem(
-                          Strings.songTitle,
-                          SearchField(Strings.songHint, _checkSongInput,
-                              _songTextController, _isSongValid)),
-                      MainButton(() {
-                        _findLyrics();
-                      }),
+                        Strings.songTitle,
+                        SearchField(Strings.songHint, _checkSongInput,
+                            _songTextController, _isSongValid),
+                      ),
+                      MainButton(() => _findLyrics()),
                     ],
                   ),
                 ),
@@ -112,9 +113,7 @@ class _HomePageState extends State<HomePage> {
         _handleSongValidationResult(isSongNameValid);
         if (isArtistValid && isSongNameValid) _setLoadingState(true);
       },
-      onRequestError: () {
-        _showErrorSnackBar();
-      },
+      onRequestError: () => _showErrorSnackBar(),
       onRequestSuccess: (String lyrics) {
         _setLoadingState(false);
         _openBottomSheet(lyrics);
@@ -148,40 +147,39 @@ class _HomePageState extends State<HomePage> {
     _setLoadingState(false);
     _key.currentState.showSnackBar(
       SnackBar(
-          content: Text(Strings.callErrorText,
-              style: TextStyle(fontSize: Constants.progressBarFontSize)),
-          duration: Duration(milliseconds: Constants.snackBarDuration)),
+        content: Text(
+          Strings.callErrorText,
+          style: TextStyle(fontSize: Constants.progressBarFontSize),
+        ),
+        duration: Duration(milliseconds: Constants.snackBarDuration),
+      ),
     );
   }
 
   void _setLoadingState(bool isLoading) {
-    setState(() {
-      _isLoading = isLoading;
-    });
+    setState(() => _isLoading = isLoading);
   }
 
   void _openBottomSheet(String lyrics) {
     showModalBottomSheet<dynamic>(
-        isScrollControlled: true,
-        context: context,
-        isDismissible: false,
-        builder: (BuildContext bc) {
-          return Wrap(children: <Widget>[
-            Container(
-              color: Constants.bottomSheetContainer,
-              child: Container(
-                decoration: new BoxDecoration(
-                    color: Constants.primaryColor,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(
-                            Constants.bottomSheetBorderRadius),
-                        topRight: const Radius.circular(
-                            Constants.bottomSheetBorderRadius))),
-                child: Lyrics(_artistTextController.text.toLowerCase(),
-                    _songTextController.text.toLowerCase(), lyrics),
-              ),
-            )
-          ]);
-        });
+      isScrollControlled: true,
+      context: context,
+      isDismissible: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext bc) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Constants.primaryColor,
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(Constants.bottomSheetBorderRadius),
+              topRight:
+                  const Radius.circular(Constants.bottomSheetBorderRadius),
+            ),
+          ),
+          child: Lyrics(_artistTextController.text.trim().toLowerCase(),
+              _songTextController.text.trim().toLowerCase(), lyrics),
+        );
+      },
+    );
   }
 }

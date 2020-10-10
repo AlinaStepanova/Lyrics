@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -9,7 +7,6 @@ class Constants {
   static final errorColor = Colors.red;
   static final defaultFontFamily = 'PlayfairDisplay';
   static final snackBarDuration = 2500;
-  static final bottomSheetContainer = Color(0xFF737373);
   static const bottomSheetBorderRadius = 25.0;
   static const borderRadius = 8.0;
   static final progressBarFontSize = 16.0;
