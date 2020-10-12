@@ -1,5 +1,7 @@
 # lyrics
 
+[![Build Status](https://travis-ci.org/ameysunu/Lyrics.svg?branch=dev)](https://travis-ci.org/ameysunu/Lyrics)
+
 Find lyrics of songs you like
 
 <p align="center">
