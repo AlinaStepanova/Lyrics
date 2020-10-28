@@ -11,7 +11,11 @@ class SearchField extends StatefulWidget {
   final isValid;
 
   const SearchField(
-      this.hintText, this.onSubmitted, this.controller, this.isValid);
+    this.hintText,
+    this.onSubmitted,
+    this.controller,
+    this.isValid,
+  );
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }

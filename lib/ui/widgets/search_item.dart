@@ -17,6 +17,7 @@ class SearchItem extends StatelessWidget {
       children: <Widget>[
         Text(title,
             style: TextStyle(
+                color: Colors.black87,
                 fontStyle: FontStyle.italic,
                 fontSize: MediaQuery.of(context).size.width * 0.045)),
         textField,
