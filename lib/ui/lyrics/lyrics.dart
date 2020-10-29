@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lyrics/utils/capitalize_text.dart';
 import 'package:lyrics/ui/widgets/header_text.dart';
 import 'package:lyrics/utils/constants.dart';
 
@@ -36,22 +37,25 @@ class _LyricsState extends State<Lyrics> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      HeaderText(widget.songName, height * 0.04, false),
-                      HeaderText(Strings.artistPrefix + widget.artist,
-                          height * 0.025, true),
+                      HeaderText(
+                          capitalize(widget.songName), height * 0.04, false),
+                      HeaderText(
+                          Strings.artistPrefix + capitalize(widget.artist),
+                          height * 0.025,
+                          true),
                     ],
                   ),
                 ),
               ),
               Divider(color: Constants.accentColor),
               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: width * 0.08,
-                      right: width * 0.08,
-                      top: width * 0.02,
-                      bottom: width * 0.05),
-                  child: SingleChildScrollView(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: width * 0.08,
+                        right: width * 0.08,
+                        top: width * 0.02,
+                        bottom: width * 0.05),
                     child: Text(
                       widget.lyrics,
                       style: TextStyle(fontSize: width * 0.0475),

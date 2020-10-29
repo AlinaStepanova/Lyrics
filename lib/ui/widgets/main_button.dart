@@ -16,6 +16,7 @@ class MainButton extends StatelessWidget {
       minWidth: width,
       height: width * 0.15,
       child: RaisedButton(
+        elevation: 0.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Constants.borderRadius),
           side: BorderSide(color: Constants.textColor, width: 0.8),

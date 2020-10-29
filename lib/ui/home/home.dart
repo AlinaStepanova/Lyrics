@@ -36,68 +36,85 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    return Scaffold(
-      resizeToAvoidBottomPadding: true,
-      backgroundColor: Constants.primaryColor,
-      key: _key,
-      body: SingleChildScrollView(
-        child: Container(
-          width: width,
-          height: height,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: height / 4,
-                padding: EdgeInsets.only(bottom: width * 0.1),
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  Strings.appName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: height * 0.07, color: Constants.textColor),
-                ),
-              ),
-              Center(
-                child: Container(
-                  alignment: Alignment.center,
-                  height: height / 2,
-                  padding:
-                      EdgeInsets.only(left: width * 0.1, right: width * 0.1),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      SearchItem(
-                        Strings.artistTitle,
-                        SearchField(Strings.artistHint, _checkArtistInput,
-                            _artistTextController, _isArtistValid),
-                      ),
-                      SearchItem(
-                        Strings.songTitle,
-                        SearchField(Strings.songHint, _checkSongInput,
-                            _songTextController, _isSongValid),
-                      ),
-                      MainButton(() => _findLyrics()),
-                    ],
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomPadding: true,
+        backgroundColor: Constants.primaryColor,
+        key: _key,
+        body: SingleChildScrollView(
+          child: Container(
+            width: width,
+            height: height,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: height / 4,
+                  padding: EdgeInsets.only(bottom: width * 0.1),
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    Strings.appName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: height * 0.07,
+                        color: Constants.textColor),
                   ),
                 ),
-              ),
-              if (_isLoading)
-                Align(
-                  alignment: Alignment.bottomCenter,
+                Center(
                   child: Container(
-                    height: height / 4,
-                    padding: EdgeInsets.only(bottom: height * 0.1),
-                    alignment: Alignment.bottomRight,
-                    child: SpinKitChasingDots(
-                      color: Theme.of(context).accentColor,
-                      size: Constants.loadingBarSize,
+                    alignment: Alignment.center,
+                    height: height / 2,
+                    padding:
+                        EdgeInsets.only(left: width * 0.1, right: width * 0.1),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SearchItem(
+                          Strings.artistTitle,
+                          SearchField(
+                              Strings.artistHint,
+                              _checkArtistInput,
+                              _artistTextController,
+                              _isArtistValid),
+                        ),
+                        SearchItem(
+                          Strings.songTitle,
+                          SearchField(Strings.songHint, _checkSongInput,
+                              _songTextController, _isSongValid),
+                        ),
+                        MainButton(() => _findLyrics()),
+                      ],
                     ),
                   ),
-                )
-            ],
+                ),
+                if (_isLoading)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: height / 4,
+                      padding: EdgeInsets.only(bottom: height * 0.1),
+                      alignment: Alignment.bottomRight,
+                      child: SpinKitChasingDots(
+                        color: Theme.of(context).accentColor,
+                        size: Constants.loadingBarSize,
+                      ),
+                    ),
+                  )
+              ],
+            ),
           ),
         ),
       ),
