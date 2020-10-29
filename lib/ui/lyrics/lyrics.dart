@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lyrics/ui/widgets/capitalize_text.dart';
+import 'package:lyrics/utils/capitalize_text.dart';
 import 'package:lyrics/ui/widgets/header_text.dart';
 import 'package:lyrics/utils/constants.dart';
 
