@@ -4,7 +4,7 @@
 
 Find lyrics of songs you like
 
-<p align="center">
+<p align="start">
   <img src="https://drive.google.com/uc?export=view&id=1SL5HUbDHGS1BPEEP3nGqOxeoqIGsM5jv" width="25%">
   <img src="https://drive.google.com/uc?export=view&id=1ALqXzXSxsws8UVFpYPS-JIBzyqGpHFTk" width="25%">
 </p>
